@@ -1,5 +1,9 @@
 # DotaForDiscord
 
+![Example Image](DotaForDiscord.png)
+
+## Setup
+
 Copy App.config.example to App.config.
 
 Insert missing values into App.config.
