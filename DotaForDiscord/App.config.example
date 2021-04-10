@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<appSettings>
+		<add key="WebhookURL" value="" />
+		<add key="ErrorWebhookURL" value="" />
+		<add key="MySqlConnectionString" value="Server=; Database=; UID=; Password=" />
+		<add key="MatchCheckIntervalMinutes" value="30" />
+	</appSettings>
+</configuration>
