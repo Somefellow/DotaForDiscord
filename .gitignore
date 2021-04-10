@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Do not commit App.config. Make sure App.config.example is up to date.
 App.config
+
+# MacBook adds this file.
+.DS_Store
