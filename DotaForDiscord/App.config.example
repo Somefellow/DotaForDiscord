@@ -1,9 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration>
 	<appSettings>
+		<!-- Main WebHook URL where matches will be announced. -->
 		<add key="WebhookURL" value="" />
+
+		<!-- Error messages will be logged to this discord channel. -->
 		<add key="ErrorWebhookURL" value="" />
+
+		<!-- Database connection -->
 		<add key="MySqlConnectionString" value="Server=; Database=; UID=; Password=" />
+
+		<!-- 30 minute interval seems to be the sweet spot to not get throttled by OpenDota CloudFlair with 10 accounts tracked. -->
 		<add key="MatchCheckIntervalMinutes" value="30" />
 	</appSettings>
 </configuration>
