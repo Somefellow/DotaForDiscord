@@ -14,7 +14,7 @@ namespace DotaForDiscord
 
         public static string FormatPlayer(string name, RecentMatch match)
         {
-            return $"{name} | {match.Hero} | {match.LobbyType} | {match.GameMode} | {(match.Win ? "Win" : "Loss")} | {match.Duration} | {match.Kills}/{match.Deaths}/{match.Assists}";
+            return $"{name} | {match.Hero} | {match.LobbyType} | {match.GameMode} | **{(match.Win ? "Win" : "Loss")}** | {match.Duration} | {match.Kills}/{match.Deaths}/{match.Assists}";
         }
 
         public static string GameModeToString(int id)
