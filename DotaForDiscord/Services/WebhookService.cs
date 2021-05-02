@@ -13,6 +13,7 @@ namespace DotaForDiscord.Services
             client.Log += async arg =>
             {
                 log.Invoke(arg.ToString(), false);
+                await Task.CompletedTask;
             };
 
             while (message.Length > 0)
