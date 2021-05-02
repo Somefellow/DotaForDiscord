@@ -10,10 +10,9 @@ namespace DotaForDiscord.Services
         {
             using var client = new DiscordWebhookClient(error ? ConfigService.ErrorWebhookURL : ConfigService.WebhookURL);
 
-            client.Log += arg =>
+            client.Log += async arg =>
             {
                 log.Invoke(arg.ToString(), false);
-                return Task.CompletedTask;
             };
 
             while (message.Length > 0)
