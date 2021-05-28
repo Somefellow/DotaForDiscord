@@ -1,6 +1,8 @@
 ﻿using DotaForDiscord.Services;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
 using System;
+using System.IO;
 using System.Threading;
 using Timer = System.Timers.Timer;
 
@@ -61,6 +63,9 @@ namespace DotaForDiscord
 
         private static void CheckMatches(Action<string, bool> log)
         {
+            var newMatchesFound = 0;
+            var start = DateTime.Now;
+
             try
             {
                 var ids = ServiceManager.LastMatchService.GetTrackedIds();
@@ -74,6 +79,8 @@ namespace DotaForDiscord
                     {
                         if (match.Id > lastMatch)
                         {
+                            newMatchesFound++;
+
                             log.Invoke($"Discovered new match for player {player.Name}.", false);
                             log.Invoke(Helper.FormatPlayer(player.Name, match), false);
 
@@ -87,6 +94,8 @@ namespace DotaForDiscord
             }
             catch (Exception e)
             {
+                newMatchesFound = -1;
+
                 try
                 {
                     WebhookService.PostMessage(e.Message, log, true);
@@ -99,6 +108,38 @@ namespace DotaForDiscord
 
                 throw;
             }
+
+            UpdateJSON(newMatchesFound, start, DateTime.Now);
+
+        }
+
+        private static void UpdateJSON(int newMatchesFound, DateTime start, DateTime end)
+        {
+            var filename = "dotafordiscord.json";
+
+            var json = new JArray();
+
+            if (File.Exists(filename))
+            {
+                try
+                {
+                    json = JArray.Parse(File.ReadAllText(filename));
+                } catch { }
+            }
+
+            var jsonObject = new JObject();
+            jsonObject["newMatchesFound"] = newMatchesFound;
+            jsonObject["start"] = start.ToString();
+            jsonObject["end"] = end.ToString();
+
+            json.Add(jsonObject);
+
+            while (json.Count > 10)
+            {
+                json.RemoveAt(0);
+            }
+
+            File.WriteAllText(filename, json.ToString());
         }
     }
 }
