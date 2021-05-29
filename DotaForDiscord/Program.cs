@@ -134,7 +134,7 @@ namespace DotaForDiscord
 
             json.Add(jsonObject);
 
-            while (json.Count > 10)
+            while (json.Count > 100)
             {
                 json.RemoveAt(0);
             }
