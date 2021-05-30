@@ -11,17 +11,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $.getJSON("dotafordiscord.json", function (data) {
+    <script>$.getJSON("dotafordiscord.json", function (data) {
             console.log(data);
 
             var rows = "";
             var enabled = "<i class='fa fa-thumbs-up' style='color: green;'></i>";
-            var disabled = "<i class='fa fa-exclamation-triangle' style='color: red;'></i>";
+            var neutral = "<i class='fa fa-thumbtack' style='color: yellow;'></i>";
+            var disabled = "<i class='fa fa-thumbs-down' style='color: red;'></i>";
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i]["newMatchesFound"] >= 0) {
+                if (data[i]["newMatchesFound"] > 0) {
                     var status = enabled;
+                } else if (data[i]["newMatchesFound"] === 0) {
+                    var status = neutral;
                 } else {
                     var status = disabled;
                 }
@@ -30,8 +32,7 @@
             }
 
             $("tbody").html(rows);
-        });
-    </script>
+        });</script>
 </head>
 <body>
     <table class="table">
