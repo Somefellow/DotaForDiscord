@@ -98,12 +98,12 @@ namespace DotaForDiscord
 
                 try
                 {
-                    WebhookService.PostMessage(e.Message, log, true);
+                    WebhookService.PostMessage($"{e.GetType().FullName}: {e.Message}", log, true);
                     WebhookService.PostMessage($"```{e.StackTrace}```", log, true);
                 }
                 catch (Exception ex)
                 {
-                    log.Invoke($"Problem posting error message to discord: {ex.Message}. StackTrace: {ex.StackTrace}", true);
+                    log.Invoke($"Problem posting error message to discord: {e.GetType().FullName}: {ex.Message}. StackTrace: {ex.StackTrace}", true);
                 }
 
                 throw;
